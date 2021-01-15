@@ -16,7 +16,7 @@ namespace pizzaProjekt
             var test = true;
             do
             {
-                Console.Write("Skriv in med siffror vilket inlägg du vill radera ");
+                Console.Write("Skriv in med siffror vilken pizza du vill ta bort ur beställningen ");
 
                 string jsonPath = @"pizza.json";
 
@@ -42,9 +42,6 @@ namespace pizzaProjekt
                 try
                 {
                     int delIndex = Convert.ToInt32(Console.ReadLine()) - 1;
-
-                    pizzaList = JsonConvert.DeserializeObject<List<CreatePizza>>(jsonData)
-                    ?? new List<CreatePizza>();
 
                     pizzaList.RemoveAt(delIndex);
 

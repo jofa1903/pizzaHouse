@@ -1,8 +1,5 @@
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
 
 
 namespace pizzaProjekt
@@ -17,9 +14,7 @@ namespace pizzaProjekt
             Name = "";
             Price = 0;
 
-
             Console.ResetColor();
-
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("");
             Console.Clear();
@@ -46,6 +41,7 @@ namespace pizzaProjekt
             Console.Write("3 ) Margeritha 70kr");
             Console.WriteLine("");
 
+
             switch (Console.ReadLine())
             {
                 case "1":
@@ -67,8 +63,6 @@ namespace pizzaProjekt
                 default:
                     break;
             }
-
-
 
         }
     }

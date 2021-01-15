@@ -29,23 +29,24 @@ namespace pizzaProjekt
             Console.WriteLine("| $$                                        ");
             Console.WriteLine("| $$                                        ");
             Console.WriteLine("|__/                                        ");
+            
             // print options to console
+            
             Console.ResetColor();
-            // Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.ResetColor();
             Console.WriteLine(" ");
             Console.WriteLine("1) Pizzameny");
-            Console.WriteLine("2) Ta bort vara ur varukorgen");
+            Console.WriteLine("2) Ta bort pizza ur beställningen");
             Console.WriteLine("3) Betala");
             Console.WriteLine(" ");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("4) Avsluta");
             Console.ResetColor();
             Console.WriteLine(" ");
-            Console.WriteLine("Varukorgen");
+            Console.WriteLine("Nuvarande beställning:");
             Console.ForegroundColor = ConsoleColor.Yellow;
-       
+
             // path to json file
             string jsonPath = @"pizza.json";
 
@@ -72,17 +73,17 @@ namespace pizzaProjekt
             switch (Console.ReadLine())
             {
                 case "1":
-                    // create post
-                    var testpizza = new CreatePizza();
+                    // create pizza
+                    var freshPizza = new CreatePizza();
 
-                    testpizza.CreateNewPizza(out string Name, out int Price);
+                    freshPizza.CreateNewPizza(out string Name, out int Price);
                     pizzaList.Add(new CreatePizza()
                     {
                         Name = Name,
                         Price = Price
-                 
+
                     });
-                    
+
                     jsonData = JsonConvert.SerializeObject(pizzaList);
                     File.WriteAllText(jsonPath, jsonData);
                     // checking to see if data exists in JSON-file and printing new data to console
@@ -99,7 +100,7 @@ namespace pizzaProjekt
                     return true;
 
                 case "2":
-                    // delete post
+                    // delete pizza
                     var removepizza = new DeletePizza();
                     removepizza.DeleteMyPizza();
                     return true;
@@ -110,15 +111,21 @@ namespace pizzaProjekt
                     return true;
 
                 case "4":
-                // if chosen exit app
-                File.Delete(@"pizza.json");
-                if (!File.Exists(jsonPath)){
-                FileStream fs = File.Create(jsonPath);
-                }
-                Console.Clear();
-                Console.WriteLine("Adios!");
-                Console.WriteLine("");
-                return false;
+                    // if chosen exit app
+
+                    // deletes old-JSON-file so basket is empty upon startup
+                    File.Delete(@"pizza.json");
+                    // creates a new empty JSON-file to prevent app from crashing upon startup
+                    if (!File.Exists(jsonPath))
+                    {
+                        FileStream fs = File.Create(jsonPath);
+                    }
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Ciao!");
+                    Console.WriteLine("");
+                    Console.ResetColor();
+                    return false;
 
                 default:
                     return true;

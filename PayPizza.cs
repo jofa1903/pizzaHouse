@@ -10,11 +10,12 @@ namespace pizzaProjekt
     public class PayPizza
     {
 
-        public void payMyPizza(){
+        public void payMyPizza()
+        {
 
             Console.Clear();
-         
-                     
+
+
             string jsonPath = @"pizza.json";
 
             var jsonData = System.IO.File.ReadAllText(jsonPath);
@@ -34,7 +35,7 @@ namespace pizzaProjekt
                 foreach (var pizza in pizzaList)
                 {
                     total = priceCount += pizza.Price;
-                    
+
                     indx++;
                 }
                 Console.WriteLine(total + "kr");
@@ -42,25 +43,31 @@ namespace pizzaProjekt
             Console.WriteLine(" ");
             Console.WriteLine("1) Betala och avsluta?");
             Console.WriteLine("2) Tillbaka till meny");
-   
 
-            switch (Console.ReadLine()){
-                 case "1":
-                 Console.Clear();
-                File.Delete(@"pizza.json");
-                if (!File.Exists(jsonPath)){
-                FileStream fs = File.Create(jsonPath);
-                }
-                 Console.Write("Tack för besöket och välkommen åter!");
-                 Console.ReadLine();
+
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    Console.Clear();
+                    // deletes old-JSON-file so basket is empty upon startup
+                    File.Delete(@"pizza.json");
+                    // creates a new empty JSON-file to prevent app from crashing upon startup
+                    if (!File.Exists(jsonPath))
+                    {
+                        FileStream fs = File.Create(jsonPath);
+                    }
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("Tack för besöket och välkommen åter!");
+                    Console.ResetColor();
+                    Console.ReadLine();
                     Environment.Exit(0);
-                 break;
+                    break;
 
                 case "2":
-                 break;
+                    break;
             }
-            
-        } 
+
+        }
 
     }
 
